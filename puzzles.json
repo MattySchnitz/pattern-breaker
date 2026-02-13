@@ -1,28 +1,67 @@
 [
   {
     "date": "2026-02-13",
-    "board": ["Cairo","Lima","Oslo","Rome","Seoul","Tokyo","Bern","Hanoi","Accra"],
-    "outlier": "Bern",
-    "rule": "All other capitals end with a vowel",
+    "board": ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Neptune","Pluto","Moon"],
+    "outlier": "Moon",
+    "rule": "All others are planets in the solar system",
     "distractors": [
-      "All words have 4 letters",
-      "All cities start with a consonant",
-      "All cities are in Europe",
-      "All words have exactly two vowels",
-      "All cities start with 'S' or 'T'"
+      "All names start with a consonant",
+      "All have moons",
+      "All are closer than Earth to the Sun",
+      "All have rings",
+      "All are visible with the naked eye"
     ]
   },
   {
     "date": "2026-02-14",
-    "board": ["FLIGHT","SCHOOL","THROUGH","PSYCHOLOGY","GNOME","KNEE","WRITE","HOUR","ANSWER"],
-    "outlier": "SCHOOL",
-    "rule": "All other words start with a silent letter",
+    "board": ["Red","Blue","Green","Yellow","Orange","Purple","Black","Cyan","Pink"],
+    "outlier": "Black",
+    "rule": "All others are colors of the rainbow",
     "distractors": [
-      "All words have six letters",
-      "All words contain the letter 'O'",
-      "All words rhyme with 'light'",
-      "All words start with a consonant cluster",
-      "All words have exactly two syllables"
+      "All are primary colors",
+      "All contain the letter 'e'",
+      "All are cool colors",
+      "All are warm colors",
+      "All are secondary colors"
+    ]
+  },
+  {
+    "date": "2026-02-15",
+    "board": ["Shakespeare","Hemingway","Rowling","Orwell","Tolkien","Austen","Dickens","Poe","Monet"],
+    "outlier": "Monet",
+    "rule": "All others are authors, Monet is a painter",
+    "distractors": [
+      "All lived in the 19th century",
+      "All are British",
+      "All are fictional characters",
+      "All are poets",
+      "All wrote novels with 'The' in the title"
+    ]
+  },
+  {
+    "date": "2026-02-16",
+    "board": ["Soccer","Basketball","Tennis","Cricket","Hockey","Rugby","Golf","Volleyball","Poker"],
+    "outlier": "Poker",
+    "rule": "All others are physical sports, Poker is a card game",
+    "distractors": [
+      "All are Olympic sports",
+      "All require a ball",
+      "All are played indoors",
+      "All are team sports",
+      "All have a net"
+    ]
+  },
+  {
+    "date": "2026-02-17",
+    "board": ["Python","Ruby","Java","C++","Swift","Perl","Go","Lisp","HTML"],
+    "outlier": "HTML",
+    "rule": "All others are programming languages, HTML is a markup language",
+    "distractors": [
+      "All start with a consonant",
+      "All are older than 20 years",
+      "All are object-oriented",
+      "All are dynamically typed",
+      "All are functional languages"
     ]
   }
 ]

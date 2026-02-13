@@ -8,9 +8,20 @@
 <body>
 <h1>Pattern Breaker</h1>
 <p id="date"></p>
+
 <div id="board" class="board"></div>
+
 <div id="feedback"></div>
+
+<div id="ruleContainer" style="display:none">
+    <label for="ruleInput">Describe the rule:</label>
+    <input type="text" id="ruleInput" placeholder="Type the pattern here..." />
+    <span id="ruleFeedback"></span>
+</div>
+
 <button id="revealRuleBtn" style="display:none;">Reveal Rule</button>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 <script src="script.js"></script>
 </body>
 </html>

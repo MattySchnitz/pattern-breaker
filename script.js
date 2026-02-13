@@ -44,40 +44,54 @@ function selectTile(tile, word) {
 
     if(word === currentPuzzle.outlier) {
         tile.classList.add('correct');
-        feedback.textContent = "✅ Correct! Now describe the rule.";
-        showRuleInput();
+        feedback.textContent = "✅ Correct! Now select the rule.";
+        showRuleOptions();
     } else {
         tile.classList.add('incorrect');
         feedback.textContent = "❌ Nope, try again.";
     }
 }
 
-function showRuleInput() {
+function showRuleOptions() {
     const container = document.getElementById('ruleContainer');
+    const optionsDiv = document.getElementById('ruleOptions');
+
     container.style.display = "block";
+    optionsDiv.innerHTML = "";
 
-    const input = document.getElementById('ruleInput');
-    const feedback = document.getElementById('ruleFeedback');
+    const allOptions = [currentPuzzle.rule, ...currentPuzzle.distractors];
+    shuffleArray(allOptions);
 
-    input.value = "";
-    feedback.textContent = "";
-
-    const fuse = new Fuse([currentPuzzle.rule], { includeScore: true, threshold: 0.4 });
-
-    const submitBtn = document.getElementById('ruleSubmitBtn');
-    submitBtn.onclick = () => {
-        const userRule = input.value.trim();
-        if (!userRule) return;
-
-        const result = fuse.search(userRule);
-        if (result.length > 0 && result[0].score < 0.35) {
-            feedback.textContent = "✅ Nice! That looks correct!";
-        } else {
-            feedback.textContent = "❌ Hmm, that doesn’t match. Try again!";
-        }
-    };
+    allOptions.forEach(option => {
+        const btn = document.createElement("div");
+        btn.className = "ruleOption";
+        btn.textContent = option;
+        btn.onclick = () => checkRule(btn, option);
+        optionsDiv.appendChild(btn);
+    });
 
     document.getElementById('revealRuleBtn').style.display = "inline";
+}
+
+function checkRule(btn, option) {
+    Array.from(document.getElementsByClassName('ruleOption')).forEach(o => {
+        o.classList.remove('correct', 'incorrect');
+    });
+
+    if(option === currentPuzzle.rule) {
+        btn.classList.add('correct');
+        document.getElementById('feedback').textContent = "✅ Correct rule!";
+    } else {
+        btn.classList.add('incorrect');
+        document.getElementById('feedback').textContent = "❌ Wrong rule, try again.";
+    }
+}
+
+function shuffleArray(arr) {
+    for(let i = arr.length -1; i >0; i--){
+        const j = Math.floor(Math.random()*(i+1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
 }
 
 document.getElementById('revealRuleBtn').onclick = () => {

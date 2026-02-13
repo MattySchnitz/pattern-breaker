@@ -3,12 +3,26 @@
     "date": "2026-02-13",
     "board": ["Cairo","Lima","Oslo","Rome","Seoul","Tokyo","Bern","Hanoi","Accra"],
     "outlier": "Bern",
-    "rule": "All other capitals end with a vowel"
+    "rule": "All other capitals end with a vowel",
+    "distractors": [
+      "All words have 4 letters",
+      "All cities start with a consonant",
+      "All cities are in Europe",
+      "All words have exactly two vowels",
+      "All cities start with 'S' or 'T'"
+    ]
   },
   {
     "date": "2026-02-14",
     "board": ["FLIGHT","SCHOOL","THROUGH","PSYCHOLOGY","GNOME","KNEE","WRITE","HOUR","ANSWER"],
     "outlier": "SCHOOL",
-    "rule": "All other words start with a silent letter"
+    "rule": "All other words start with a silent letter",
+    "distractors": [
+      "All words have six letters",
+      "All words contain the letter 'O'",
+      "All words rhyme with 'light'",
+      "All words start with a consonant cluster",
+      "All words have exactly two syllables"
+    ]
   }
 ]

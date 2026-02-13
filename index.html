@@ -7,11 +7,13 @@
 </head>
 <body>
 <h1>Pattern Breaker</h1>
+<p id="blurb">Select the tile that doesn’t belong, then choose the rule that explains why!</p>
 <p id="date"></p>
 
 <div id="board" class="board"></div>
 
-<div id="feedback"></div>
+<div id="tileFeedback" class="feedbackLine"></div>
+<div id="ruleFeedbackLine" class="feedbackLine"></div>
 
 <div id="ruleContainer" style="display:none">
     <p>Select the correct rule:</p>
@@ -19,6 +21,10 @@
 </div>
 
 <button id="revealRuleBtn" style="display:none;">Reveal Rule</button>
+
+<footer style="margin-top: 40px; font-size: 12px; color: #888;">
+    © 2026 Mattyschintz Productions
+</footer>
 
 <script src="script.js"></script>
 </body>

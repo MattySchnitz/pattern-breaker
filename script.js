@@ -1,5 +1,6 @@
 let puzzles = [];
 let currentPuzzle;
+let incorrectGuesses = 0; // cumulative across tile + rule selection
 
 function loadPuzzles() {
     fetch('puzzles.json')
@@ -15,6 +16,8 @@ function loadDailyPuzzle() {
     currentPuzzle = puzzles.find(p => p.date === today) || puzzles[0]; // fallback
     document.getElementById('date').textContent = `Puzzle for ${currentPuzzle.date}`;
     renderBoard();
+    incorrectGuesses = 0;
+    document.getElementById('revealRuleBtn').style.display = "none";
 }
 
 function renderBoard() {
@@ -29,26 +32,26 @@ function renderBoard() {
         boardDiv.appendChild(tile);
     });
 
-    document.getElementById('feedback').textContent = "";
+    document.getElementById('tileFeedback').textContent = "";
+    document.getElementById('ruleFeedbackLine').textContent = "";
     document.getElementById('ruleContainer').style.display = "none";
-    document.getElementById('revealRuleBtn').style.display = "none";
 }
 
 function selectTile(tile, word) {
-    const feedback = document.getElementById('feedback');
+    const feedback = document.getElementById('tileFeedback');
 
-    // Reset previous animations
     Array.from(document.getElementsByClassName('tile')).forEach(t => {
         t.classList.remove('correct', 'incorrect');
     });
 
     if(word === currentPuzzle.outlier) {
         tile.classList.add('correct');
-        feedback.textContent = "✅ Correct! Now select the rule.";
+        feedback.textContent = "✅ You found the outlier!";
         showRuleOptions();
     } else {
         tile.classList.add('incorrect');
-        feedback.textContent = "❌ Nope, try again.";
+        feedback.textContent = "❌ Not the outlier, try again!";
+        incrementIncorrect();
     }
 }
 
@@ -69,8 +72,6 @@ function showRuleOptions() {
         btn.onclick = () => checkRule(btn, option);
         optionsDiv.appendChild(btn);
     });
-
-    document.getElementById('revealRuleBtn').style.display = "inline";
 }
 
 function checkRule(btn, option) {
@@ -78,12 +79,22 @@ function checkRule(btn, option) {
         o.classList.remove('correct', 'incorrect');
     });
 
+    const ruleFeedback = document.getElementById('ruleFeedbackLine');
+
     if(option === currentPuzzle.rule) {
         btn.classList.add('correct');
-        document.getElementById('feedback').textContent = "✅ Correct rule!";
+        ruleFeedback.textContent = "✅ Correct rule!";
     } else {
         btn.classList.add('incorrect');
-        document.getElementById('feedback').textContent = "❌ Wrong rule, try again.";
+        ruleFeedback.textContent = "❌ Wrong rule, try again!";
+        incrementIncorrect();
+    }
+}
+
+function incrementIncorrect() {
+    incorrectGuesses++;
+    if(incorrectGuesses >= 2) {
+        document.getElementById('revealRuleBtn').style.display = "inline";
     }
 }
 

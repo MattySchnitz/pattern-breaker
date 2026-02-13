@@ -1,0 +1,6 @@
+body { font-family: sans-serif; text-align: center; }
+.board { display: grid; grid-template-columns: repeat(3, 150px); gap: 10px; justify-content: center; margin: 20px; }
+.tile { padding: 20px; background: #f2f2f2; border-radius: 8px; cursor: pointer; user-select: none; }
+.tile:hover { background: #ddd; }
+button { margin-top: 20px; padding: 10px 20px; }
+#feedback { margin-top: 15px; font-weight: bold; }

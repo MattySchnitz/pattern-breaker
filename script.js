@@ -12,12 +12,30 @@ function loadPuzzles() {
 }
 
 function loadDailyPuzzle() {
-    const today = new Date().toISOString().slice(0,10); // YYYY-MM-DD
-    currentPuzzle = puzzles.find(p => p.date === today) || puzzles[0]; // fallback
-    document.getElementById('date').textContent = `Puzzle for ${currentPuzzle.date}`;
+    const today = new Date();
+    const todayStr = formatDate(today);
+    currentPuzzle = puzzles.find(p => p.date === today.toISOString().slice(0,10)) || puzzles[0];
+    document.getElementById('date').textContent = `Puzzle for ${todayStr}`;
     renderBoard();
     incorrectGuesses = 0;
     document.getElementById('revealRuleBtn').style.display = "none";
+}
+
+// Format date as "February 13th, 2026"
+function formatDate(d) {
+    const monthNames = ["January","February","March","April","May","June",
+                        "July","August","September","October","November","December"];
+    const day = d.getDate();
+    const daySuffix = (day) => {
+        if(day>=11 && day<=13) return 'th';
+        switch(day%10){
+            case 1: return 'st';
+            case 2: return 'nd';
+            case 3: return 'rd';
+            default: return 'th';
+        }
+    }
+    return `${monthNames[d.getMonth()]} ${day}${daySuffix(day)}, ${d.getFullYear()}`;
 }
 
 function renderBoard() {
@@ -61,6 +79,7 @@ function showRuleOptions() {
 
     container.style.display = "block";
     optionsDiv.innerHTML = "";
+    document.getElementById('ruleFeedbackLine').textContent = "";
 
     const allOptions = [currentPuzzle.rule, ...currentPuzzle.distractors];
     shuffleArray(allOptions);

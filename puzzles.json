@@ -1,67 +1,80 @@
 [
   {
     "date": "2026-02-13",
-    "board": ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Neptune","Pluto","Moon"],
-    "outlier": "Moon",
-    "rule": "All others are planets in the solar system",
+    "board": ["2","4","6","8","10","12","14","16","17"],
+    "outlier": "17",
+    "rule": "All others are even numbers, 17 is odd",
     "distractors": [
-      "All names start with a consonant",
-      "All have moons",
-      "All are closer than Earth to the Sun",
-      "All have rings",
-      "All are visible with the naked eye"
+      "All numbers are greater than 1",
+      "All numbers are less than 20",
+      "All numbers are multiples of 2 except 17",
+      "All numbers are divisible by 2",
+      "All numbers are integers"
     ]
   },
   {
     "date": "2026-02-14",
+    "board": ["1","4","9","16","25","36","49","64","50"],
+    "outlier": "50",
+    "rule": "All others are perfect squares",
+    "distractors": [
+      "All are even numbers except 1, 9, 25, 49",
+      "All numbers are less than 65",
+      "All are integers",
+      "All are multiples of 1",
+      "All are greater than 0"
+    ]
+  },
+  {
+    "date": "2026-02-15",
+    "board": ["2","3","5","7","11","13","17","19","21"],
+    "outlier": "21",
+    "rule": "All others are prime numbers",
+    "distractors": [
+      "All numbers are odd",
+      "All numbers are less than 22",
+      "All numbers are integers",
+      "All numbers are greater than 1",
+      "All numbers are single digits except some"
+    ]
+  },
+  {
+    "date": "2026-02-16",
+    "board": ["🍎","🍌","🍇","🍓","🍊","🥝","🍍","🥑","🥦"],
+    "outlier": "🥦",
+    "rule": "All others are fruits, broccoli is a vegetable",
+    "distractors": [
+      "All emojis are edible",
+      "All emojis are green except some",
+      "All emojis start with a vowel name",
+      "All emojis are sweet",
+      "All emojis are round"
+    ]
+  },
+  {
+    "date": "2026-02-17",
+    "board": ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Neptune","Pluto","Moon"],
+    "outlier": "Moon",
+    "rule": "All others are planets in the solar system, Moon is a satellite",
+    "distractors": [
+      "All names start with a consonant",
+      "All are visible from space",
+      "All have moons except Pluto",
+      "All are round",
+      "All orbit the Sun"
+    ]
+  },
+  {
+    "date": "2026-02-18",
     "board": ["Red","Blue","Green","Yellow","Orange","Purple","Black","Cyan","Pink"],
     "outlier": "Black",
-    "rule": "All others are colors of the rainbow",
+    "rule": "All others are rainbow colors",
     "distractors": [
       "All are primary colors",
       "All contain the letter 'e'",
       "All are cool colors",
       "All are warm colors",
-      "All are secondary colors"
-    ]
-  },
-  {
-    "date": "2026-02-15",
-    "board": ["Shakespeare","Hemingway","Rowling","Orwell","Tolkien","Austen","Dickens","Poe","Monet"],
-    "outlier": "Monet",
-    "rule": "All others are authors, Monet is a painter",
-    "distractors": [
-      "All lived in the 19th century",
-      "All are British",
-      "All are fictional characters",
-      "All are poets",
-      "All wrote novels with 'The' in the title"
-    ]
-  },
-  {
-    "date": "2026-02-16",
-    "board": ["Soccer","Basketball","Tennis","Cricket","Hockey","Rugby","Golf","Volleyball","Poker"],
-    "outlier": "Poker",
-    "rule": "All others are physical sports, Poker is a card game",
-    "distractors": [
-      "All are Olympic sports",
-      "All require a ball",
-      "All are played indoors",
-      "All are team sports",
-      "All have a net"
-    ]
-  },
-  {
-    "date": "2026-02-17",
-    "board": ["Python","Ruby","Java","C++","Swift","Perl","Go","Lisp","HTML"],
-    "outlier": "HTML",
-    "rule": "All others are programming languages, HTML is a markup language",
-    "distractors": [
-      "All start with a consonant",
-      "All are older than 20 years",
-      "All are object-oriented",
-      "All are dynamically typed",
-      "All are functional languages"
+      "All start with a consonant"
     ]
   }
 ]

@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2026-02-13",
+    "board": ["Cairo","Lima","Oslo","Rome","Seoul","Tokyo","Bern","Hanoi","Accra"],
+    "outlier": "Bern",
+    "rule": "All other capitals end with a vowel"
+  },
+  {
+    "date": "2026-02-14",
+    "board": ["FLIGHT","SCHOOL","THROUGH","PSYCHOLOGY","GNOME","KNEE","WRITE","HOUR","ANSWER"],
+    "outlier": "SCHOOL",
+    "rule": "All other words start with a silent letter"
+  }
+]

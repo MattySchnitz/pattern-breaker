@@ -16,11 +16,13 @@
 <div id="ruleContainer" style="display:none">
     <label for="ruleInput">Describe the rule:</label>
     <input type="text" id="ruleInput" placeholder="Type the pattern here..." />
+    <button id="ruleSubmitBtn">Submit</button>
     <span id="ruleFeedback"></span>
 </div>
 
 <button id="revealRuleBtn" style="display:none;">Reveal Rule</button>
 
+<!-- Fuse.js for fuzzy matching -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
 <script src="script.js"></script>
 </body>

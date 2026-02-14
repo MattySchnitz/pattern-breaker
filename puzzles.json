@@ -1,6 +1,6 @@
 [
 {
-"date": "2026-03-02",
+"date": "2026-02-15",
 "board": ["2","4","6","8","10","12","14","16","18"],
 "outlier": "18",
 "rule": "All others are single-digit even numbers",
@@ -14,7 +14,7 @@
 },
 
 {
-"date": "2026-03-03",
+"date": "2026-02-14",
 "board": ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🦁"],
 "outlier": "🦊",
 "rule": "All others are commonly domesticated or zoo mammals, fox is typically wild",
@@ -28,7 +28,7 @@
 },
 
 {
-"date": "2026-03-04",
+"date": "2026-02-16",
 "board": ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Sun"],
 "outlier": "Sun",
 "rule": "All others are planets",
@@ -42,7 +42,7 @@
 },
 
 {
-"date": "2026-03-05",
+"date": "2026-02-17",
 "board": ["1","1","2","3","5","8","13","21","22"],
 "outlier": "22",
 "rule": "All others are Fibonacci numbers",
@@ -56,10 +56,10 @@
 },
 
 {
-"date": "2026-03-06",
+"date": "2026-02-18",
 "board": ["CLOUD","RAIN","SNOW","SLEET","FOG","WIND","HAIL","STORM","SUN"],
 "outlier": "SUN",
-"rule": "All others are weather conditions, sun is not weather",
+"rule": "All others are weather conditions",
 "distractors": [
 "All relate to sky",
 "All are nouns",
@@ -70,7 +70,7 @@
 },
 
 {
-"date": "2026-03-07",
+"date": "2026-02-19",
 "board": ["3","5","7","11","13","17","19","23","27"],
 "outlier": "27",
 "rule": "All others are prime numbers",
@@ -84,7 +84,7 @@
 },
 
 {
-"date": "2026-03-08",
+"date": "2026-02-20",
 "board": ["🍎","🍌","🍇","🍓","🥝","🍍","🥑","🍊","🥦"],
 "outlier": "🥦",
 "rule": "All others are fruits",
@@ -98,7 +98,7 @@
 },
 
 {
-"date": "2026-03-09",
+"date": "2026-02-21",
 "board": ["4","9","16","25","36","49","64","81","90"],
 "outlier": "90",
 "rule": "All others are perfect squares",
@@ -112,7 +112,7 @@
 },
 
 {
-"date": "2026-03-10",
+"date": "2026-02-22",
 "board": ["Paris","London","Berlin","Rome","Madrid","Lisbon","Vienna","Oslo","Chicago"],
 "outlier": "Chicago",
 "rule": "All others are European capitals",
@@ -126,7 +126,7 @@
 },
 
 {
-"date": "2026-03-11",
+"date": "2026-02-23",
 "board": ["🚗","🚕","🚌","🚑","🚒","🚓","🚜","🚲","🚁"],
 "outlier": "🚁",
 "rule": "All others are ground vehicles",
@@ -140,7 +140,7 @@
 },
 
 {
-"date": "2026-03-12",
+"date": "2026-02-24",
 "board": ["64","32","16","8","4","2","1","0","3"],
 "outlier": "3",
 "rule": "All others are powers of 2",
@@ -154,7 +154,7 @@
 },
 
 {
-"date": "2026-03-13",
+"date": "2026-02-25",
 "board": ["READ","DEAR","DARE","EARD","ARED","REDA","RAED","RDEA","LEAD"],
 "outlier": "LEAD",
 "rule": "All others are anagrams of READ",
@@ -168,7 +168,7 @@
 },
 
 {
-"date": "2026-03-14",
+"date": "2026-02-26",
 "board": ["1","4","7","10","13","16","19","22","23"],
 "outlier": "23",
 "rule": "All others increase by 3 each time",
@@ -182,7 +182,7 @@
 },
 
 {
-"date": "2026-03-15",
+"date": "2026-02-27",
 "board": ["⚽","🏀","🏈","⚾","🎾","🏐","🏉","🏓","🎲"],
 "outlier": "🎲",
 "rule": "All others are sports equipment, dice is a game piece",
@@ -196,7 +196,7 @@
 },
 
 {
-"date": "2026-03-16",
+"date": "2026-02-28",
 "board": ["2","3","5","7","11","13","17","19","20"],
 "outlier": "20",
 "rule": "All others are prime numbers",
@@ -210,7 +210,7 @@
 },
 
 {
-"date": "2026-03-17",
+"date": "2026-03-01",
 "board": ["C","D","E","F","G","A","B","H","I"],
 "outlier": "H",
 "rule": "All others are musical notes",
@@ -224,10 +224,10 @@
 },
 
 {
-"date": "2026-03-18",
+"date": "2026-03-02",
 "board": ["🌍","🌎","🌏","🌕","🌖","🌗","🌘","🌑","🌒"],
 "outlier": "🌕",
-"rule": "All others show phases of the moon, full globe is Earth",
+"rule": "All others show phases of the moon, globe is Earth",
 "distractors": [
 "All are circular",
 "All are space related",
@@ -238,7 +238,7 @@
 },
 
 {
-"date": "2026-03-19",
+"date": "2026-03-03",
 "board": ["10","20","30","40","50","60","70","80","85"],
 "outlier": "85",
 "rule": "All others are multiples of 10",
@@ -252,7 +252,7 @@
 },
 
 {
-"date": "2026-03-20",
+"date": "2026-03-04",
 "board": ["ANGLE","CIRCLE","SQUARE","TRIANGLE","OVAL","HEXAGON","PENTAGON","OCTAGON","SPHERE"],
 "outlier": "SPHERE",
 "rule": "All others are 2D shapes",
@@ -266,7 +266,7 @@
 },
 
 {
-"date": "2026-03-21",
+"date": "2026-03-05",
 "board": ["1","8","27","64","125","216","343","512","600"],
 "outlier": "600",
 "rule": "All others are perfect cubes",

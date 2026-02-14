@@ -1,19 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>9omoly</title>
+<link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
+
+<style>
+body {
+  background:#000;
+  color:#fff;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial;
+  text-align:center;
+  margin:0;
+  padding:15px;
+}
+
+h1 {
+  font-family:'Rubik Glitch', cursive;
+  color:orange;
+  font-size:42px;
+  margin:10px 0;
+}
+
+.date { color:#aaa; margin-bottom:10px; }
+
+.how-to {
+  max-width:600px;
+  margin:10px auto 20px;
+  font-size:14px;
+  color:#ccc;
+  line-height:1.5;
+}
+
+.grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  max-width:400px;
+  margin:20px auto;
+}
+
+.tile {
+  background:#111;
+  border:2px solid orange;
+  padding:22px 0;
+  font-size:20px;
+  border-radius:8px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.tile.correct { background:#2ecc71; border-color:#2ecc71; }
+.tile.wrong { background:#e74c3c; border-color:#e74c3c; }
+
+.rule-section { margin-top:20px; }
+
+.rule-option {
+  margin:10px auto;
+  padding:12px;
+  max-width:500px;
+  width:100%;
+  border:2px solid orange;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.rule-option:hover { background:orange; color:black; }
+
+button.share-btn {
+  margin-top:20px;
+  padding:12px 20px;
+  background:orange;
+  border:none;
+  font-weight:bold;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.modal {
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.9);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-box {
+  background:#111;
+  border:2px solid orange;
+  padding:30px;
+  border-radius:12px;
+}
+
+footer { margin-top:40px; font-size:12px; color:#666; }
+</style>
+</head>
+
+<body>
+
+<h1>9omoly</h1>
+<div class="date" id="dateDisplay"></div>
+
+<div class="how-to">
+Find the one item that doesn’t follow the hidden rule.<br>
+Then select the statement that correctly describes the pattern.<br>
+Three mistakes and you're out.
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="rule-section" id="ruleSection" style="display:none;">
+<h3>Which statement correctly describes the pattern?</h3>
+<div id="rules"></div>
+</div>
+
+<footer>© 2026 MattySchnitz Productions</footer>
+
+<div class="modal" id="winModal">
+<div class="modal-box">
+<h2>You Win 🎉</h2>
+</div>
+</div>
+
+<div class="modal" id="loseModal">
+<div class="modal-box">
+<h2>You Lose 💀</h2>
+</div>
+</div>
+
 <script>
 let strikes = 0;
 let outlierSelected = false;
 let gameOver = false;
+let tileResults = [];
+let ruleResult = "";
+
+// Show today in nice format
+const today = new Date();
+const options = { month:'long', day:'numeric', year:'numeric' };
+document.getElementById("dateDisplay").innerText = today.toLocaleDateString("en-US", options);
 
 fetch('puzzles.json')
 .then(res => res.json())
 .then(data => {
-
-  const todayStr = new Date().toISOString().split('T')[0];
-
-  let puzzle = data.find(p => p.date === todayStr);
-
-  if (!puzzle) {
-    puzzle = data[0]; // fallback
-  }
+  const todayStr = today.toISOString().split('T')[0];
+  let puzzle = data.find(p => p.date === todayStr) || data[0];
 
   const board = puzzle.board.slice();
   shuffle(board);
@@ -30,10 +162,12 @@ fetch('puzzles.json')
 
       if (item === puzzle.outlier) {
         div.classList.add("correct");
+        tileResults.push("🟩");
         outlierSelected = true;
         renderRules(puzzle);
       } else {
         div.classList.add("wrong");
+        tileResults.push("🟥");
         strikes++;
         checkGameOver();
       }
@@ -41,19 +175,16 @@ fetch('puzzles.json')
 
     grid.appendChild(div);
   });
-
 });
 
 function renderRules(puzzle) {
-
   const rulesDiv = document.getElementById("rules");
-  rulesDiv.innerHTML = "<h3>Which statement correctly describes the pattern?</h3>";
+  rulesDiv.innerHTML = "";
 
   const allRules = [puzzle.rule, ...puzzle.distractors];
   shuffle(allRules);
 
   allRules.forEach(ruleText => {
-
     const div = document.createElement("div");
     div.className = "rule-option";
     div.innerText = ruleText;
@@ -62,9 +193,10 @@ function renderRules(puzzle) {
       if (gameOver) return;
 
       if (ruleText === puzzle.rule) {
-        document.getElementById("winModal").style.display = "flex";
-        gameOver = true;
+        ruleResult = "🟦";
+        endGame(true);
       } else {
+        ruleResult = "🟧";
         strikes++;
         checkGameOver();
       }
@@ -78,15 +210,46 @@ function renderRules(puzzle) {
 
 function checkGameOver() {
   if (strikes >= 3) {
-    gameOver = true;
-    document.getElementById("loseModal").style.display = "flex";
+    endGame(false);
   }
 }
 
+function endGame(win) {
+  gameOver = true;
+  const modal = document.getElementById(win ? "winModal" : "loseModal");
+  modal.style.display = "flex";
+  addShareButton(win);
+}
+
+function addShareButton(win) {
+  const modalBox = document.querySelector(".modal-box");
+  const btn = document.createElement("button");
+  btn.className = "share-btn";
+  btn.innerText = "Share Results";
+
+  btn.onclick = () => {
+    const date = today.toISOString().split('T')[0];
+    const shareText =
+`9omoly ${date}
+
+${tileResults.join("")}
+${ruleResult}
+
+${strikes}/3 mistakes`;
+    navigator.clipboard.writeText(shareText);
+    btn.innerText = "Copied!";
+  };
+
+  modalBox.appendChild(btn);
+}
+
 function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+  for (let i=array.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [array[i],array[j]]=[array[j],array[i]];
   }
 }
 </script>
+
+</body>
+</html>

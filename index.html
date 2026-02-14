@@ -136,7 +136,7 @@ let gameOver = false;
 let tileResults = [];
 let ruleResult = "";
 
-// Show today in nice format
+// Display today nicely
 const today = new Date();
 const options = { month:'long', day:'numeric', year:'numeric' };
 document.getElementById("dateDisplay").innerText = today.toLocaleDateString("en-US", options);
@@ -162,12 +162,12 @@ fetch('puzzles.json')
 
       if (item === puzzle.outlier) {
         div.classList.add("correct");
-        tileResults.push("🟩");
+        tileResults.push("🟦"); // neutral for share
         outlierSelected = true;
         renderRules(puzzle);
       } else {
         div.classList.add("wrong");
-        tileResults.push("🟥");
+        tileResults.push("🟦"); // neutral
         strikes++;
         checkGameOver();
       }
@@ -193,10 +193,10 @@ function renderRules(puzzle) {
       if (gameOver) return;
 
       if (ruleText === puzzle.rule) {
-        ruleResult = "🟦";
+        ruleResult = "🟦"; // neutral
         endGame(true);
       } else {
-        ruleResult = "🟧";
+        ruleResult = "🟦"; // neutral
         strikes++;
         checkGameOver();
       }
@@ -218,10 +218,10 @@ function endGame(win) {
   gameOver = true;
   const modal = document.getElementById(win ? "winModal" : "loseModal");
   modal.style.display = "flex";
-  addShareButton(win);
+  addShareButton();
 }
 
-function addShareButton(win) {
+function addShareButton() {
   const modalBox = document.querySelector(".modal-box");
   const btn = document.createElement("button");
   btn.className = "share-btn";
@@ -236,6 +236,7 @@ ${tileResults.join("")}
 ${ruleResult}
 
 ${strikes}/3 mistakes`;
+
     navigator.clipboard.writeText(shareText);
     btn.innerText = "Copied!";
   };

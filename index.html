@@ -1,302 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>9omoly</title>
-
-  <!-- Fun font for title -->
-  <link href="https://fonts.googleapis.com/css2?family=Rubik+Glitch&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      background: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 20px;
-    }
-
-    h1 {
-      font-family: 'Rubik Glitch', cursive;
-      color: orange;
-      font-size: 48px;
-      margin-bottom: 5px;
-    }
-
-    .date {
-      color: #aaa;
-      margin-bottom: 10px;
-    }
-
-    .how-to {
-      max-width: 600px;
-      margin: 10px auto 20px;
-      font-size: 14px;
-      color: #ccc;
-      line-height: 1.5;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 120px);
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
-    .tile {
-      background: #111;
-      border: 2px solid orange;
-      padding: 20px;
-      cursor: pointer;
-      font-size: 18px;
-      transition: all 0.2s ease;
-    }
-
-    .tile:hover {
-      background: orange;
-      color: black;
-    }
-
-    .tile.correct {
-      background: green;
-      color: white;
-      animation: pop 0.4s ease;
-    }
-
-    .tile.wrong {
-      background: crimson;
-      color: white;
-      animation: shake 0.4s ease;
-    }
-
-    @keyframes shake {
-      0% { transform: translateX(0); }
-      25% { transform: translateX(-6px); }
-      50% { transform: translateX(6px); }
-      75% { transform: translateX(-6px); }
-      100% { transform: translateX(0); }
-    }
-
-    @keyframes pop {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.15); }
-      100% { transform: scale(1); }
-    }
-
-    .rule-section {
-      margin-top: 20px;
-    }
-
-    .rule-option {
-      display: block;
-      margin: 8px auto;
-      padding: 8px;
-      background: #111;
-      border: 1px solid orange;
-      width: 300px;
-      cursor: pointer;
-    }
-
-    .rule-option:hover {
-      background: orange;
-      color: black;
-    }
-
-    .feedback {
-      margin-top: 10px;
-      font-weight: bold;
-      min-height: 24px;
-    }
-
-    .reveal {
-      margin-top: 10px;
-      color: orange;
-      cursor: pointer;
-      display: none;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 12px;
-      color: #666;
-    }
-
-    /* Modal Styles */
-    .modal {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      visibility: hidden;
-    }
-
-    .modal.active {
-      visibility: visible;
-    }
-
-    .modal-box {
-      background: #111;
-      border: 2px solid orange;
-      padding: 30px;
-      text-align: center;
-      animation: pop 0.3s ease;
-    }
-
-    .modal-box h2 {
-      color: orange;
-      margin-bottom: 15px;
-    }
-
-    .modal-box button {
-      padding: 8px 15px;
-      background: orange;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-  </style>
-</head>
-<body>
-
-<h1>9omoly</h1>
-<div class="date">February 14th, 2026</div>
-
-<div class="how-to">
-  Find the one item that doesn’t follow the hidden rule.
-  Then choose the rule that explains the pattern.
-  You have 3 total mistakes. Choose wisely.
-</div>
-
-<div class="grid" id="grid"></div>
-
-<div class="rule-section" id="ruleSection" style="display:none;">
-  <h3>Select the rule:</h3>
-  <div id="rules"></div>
-  <div class="feedback" id="ruleFeedback"></div>
-  <div class="reveal" id="revealRule"></div>
-</div>
-
-<footer>
-  © 2026 MattySchnitz Productions
-</footer>
-
-<!-- Win Modal -->
-<div class="modal" id="winModal">
-  <div class="modal-box">
-    <h2>You Win 🎉</h2>
-    <p>Elite pattern recognition.</p>
-    <button onclick="location.reload()">Play Again</button>
-  </div>
-</div>
-
-<!-- Lose Modal -->
-<div class="modal" id="loseModal">
-  <div class="modal-box">
-    <h2>You Lose 💀</h2>
-    <p>The pattern got you this time.</p>
-    <button onclick="location.reload()">Try Again</button>
-  </div>
-</div>
-
 <script>
-const puzzle = {
-  items: ["14", "28", "35", "49", "63", "70", "84", "91", "100"],
-  outlierIndex: 8,
-  rules: [
-    "All numbers are multiples of 7",
-    "All numbers are divisible by 7 except one",
-    "All numbers are two digits",
-    "All numbers are odd",
-    "All numbers are prime",
-    "All numbers are factors of 98"
-  ],
-  correctRuleIndex: 1
-};
-
 let strikes = 0;
 let outlierSelected = false;
 let gameOver = false;
 
-function checkGameOver() {
-  if (strikes >= 3 && !gameOver) {
-    gameOver = true;
-    document.getElementById("loseModal").classList.add("active");
-  }
-}
+fetch('puzzles.json')
+.then(res => res.json())
+.then(data => {
 
-function renderGrid() {
+  const todayStr = new Date().toISOString().split('T')[0];
+
+  let puzzle = data.find(p => p.date === todayStr);
+
+  if (!puzzle) {
+    puzzle = data[0]; // fallback
+  }
+
+  const board = puzzle.board.slice();
+  shuffle(board);
+
   const grid = document.getElementById("grid");
 
-  puzzle.items.forEach((item, index) => {
-    const tile = document.createElement("div");
-    tile.className = "tile";
-    tile.innerText = item;
+  board.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "tile";
+    div.innerText = item;
 
-    tile.onclick = () => {
+    div.onclick = () => {
       if (outlierSelected || gameOver) return;
 
-      if (index === puzzle.outlierIndex) {
-        tile.classList.add("correct");
+      if (item === puzzle.outlier) {
+        div.classList.add("correct");
         outlierSelected = true;
-        renderRules();
-        document.getElementById("ruleSection").style.display = "block";
+        renderRules(puzzle);
       } else {
-        tile.classList.add("wrong");
+        div.classList.add("wrong");
         strikes++;
         checkGameOver();
       }
     };
 
-    grid.appendChild(tile);
+    grid.appendChild(div);
   });
-}
 
-function renderRules() {
+});
+
+function renderRules(puzzle) {
+
   const rulesDiv = document.getElementById("rules");
-  rulesDiv.innerHTML = "";
+  rulesDiv.innerHTML = "<h3>Which statement correctly describes the pattern?</h3>";
 
-  puzzle.rules.forEach((rule, index) => {
+  const allRules = [puzzle.rule, ...puzzle.distractors];
+  shuffle(allRules);
+
+  allRules.forEach(ruleText => {
+
     const div = document.createElement("div");
     div.className = "rule-option";
-    div.innerText = rule;
+    div.innerText = ruleText;
 
     div.onclick = () => {
       if (gameOver) return;
 
-      if (index === puzzle.correctRuleIndex) {
-        document.getElementById("ruleFeedback").innerText = "Correct rule! 🔥";
-        document.getElementById("winModal").classList.add("active");
+      if (ruleText === puzzle.rule) {
+        document.getElementById("winModal").style.display = "flex";
         gameOver = true;
       } else {
-        document.getElementById("ruleFeedback").innerText = "Wrong rule.";
         strikes++;
         checkGameOver();
-        if (strikes >= 2) {
-          document.getElementById("revealRule").style.display = "block";
-        }
       }
     };
 
     rulesDiv.appendChild(div);
   });
 
-  const reveal = document.getElementById("revealRule");
-  reveal.innerText = "Reveal Rule";
-  reveal.onclick = () => {
-    reveal.innerText = "Correct Rule: " + puzzle.rules[puzzle.correctRuleIndex];
-  };
+  document.getElementById("ruleSection").style.display = "block";
 }
 
-renderGrid();
-</script>
+function checkGameOver() {
+  if (strikes >= 3) {
+    gameOver = true;
+    document.getElementById("loseModal").style.display = "flex";
+  }
+}
 
-</body>
-</html>
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+</script>

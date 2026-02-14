@@ -25,46 +25,42 @@
     max-width:400px;
     text-align:center;
   }
-  .board, .rules { 
+  .board { 
     display:grid; 
     grid-template-columns: repeat(3, 100px); 
     gap:10px; 
     margin:20px 0; 
   }
-  .cell, .rule-btn { 
+  .cell { 
     background:#222; 
     padding:20px; 
     text-align:center; 
     cursor:pointer; 
     border-radius:10px; 
     font-weight:bold; 
-    font-size:1.1em; 
+    font-size:1.2em; 
     transition: all 0.3s; 
   }
-  .cell.correct, .rule-btn.correct { 
+  .cell.correct { 
     background:green; 
   }
-  .cell.wrong, .rule-btn.wrong { 
+  .cell.wrong { 
     background:red; 
     opacity:0.6; 
   }
-  #result, #ruleFeedback { 
+  #result { 
     margin-top:20px; 
     font-size:1.2em; 
     color:orange; 
     text-align:center;
   }
-  #ruleSection {
+  #rule { 
+    margin-top:15px; 
+    font-size:1em; 
+    color:#fff; 
+    text-align:center;
     display:none;
-    flex-direction:column;
-    align-items:center;
-    width:100%;
     max-width:400px;
-  }
-  footer {
-    margin-top:30px;
-    font-size:0.8em;
-    color:#888;
   }
 </style>
 </head>
@@ -74,93 +70,172 @@
 <div id="instructions">Click the item you think is the outlier!</div>
 <div class="board" id="board"></div>
 <div id="result"></div>
-
-<div id="ruleSection">
-  <div id="ruleInstructions" style="margin-top:10px;">Select the rule that matches the rest of the board:</div>
-  <div class="rules" id="rules"></div>
-  <div id="ruleFeedback"></div>
-</div>
-
-<footer>&copy; 2026 MattySchnitz Productions</footer>
+<div id="rule"></div>
 
 <script>
-const today = "2026-02-14"; // change dynamically if desired
-let ruleWrongCount = 0;
+const puzzles = [
+  {
+    "date": "2026-02-14",
+    "board": ["Accra","Paris","Berlin","Rome","Vienna","Lisbon","Oslo","Madrid","Athens"],
+    "outlier": "Accra",
+    "rule": "All others are NOT one letter off from a car brand",
+    "distractors": [
+      "All others are capitals of European countries",
+      "All others are cities in Europe",
+      "All others have 5 letters",
+      "All others contain the letter 'r'",
+      "All others start with a vowel"
+    ]
+  },
+  {
+    "date": "2026-02-15",
+    "board": ["2","4","6","8","10","12","14","16","18"],
+    "outlier": "18",
+    "rule": "All others are less than 18",
+    "distractors": [
+      "All others are even numbers",
+      "All others are multiples of 2",
+      "All others are positive integers",
+      "All others are divisible by 2",
+      "All others are single-digit numbers"
+    ]
+  },
+  {
+    "date": "2026-02-16",
+    "board": ["11","13","17","19","23","29","15","31","37"],
+    "outlier": "15",
+    "rule": "All others are prime numbers",
+    "distractors": [
+      "All others are odd numbers",
+      "All others are greater than 10",
+      "All others are two-digit numbers",
+      "All others are less than 40",
+      "All others end with 1,3,7, or 9"
+    ]
+  },
+  {
+    "date": "2026-02-17",
+    "board": ["Hanoi","Paris","Berlin","Rome","Vienna","Lisbon","Oslo","Madrid","Athens"],
+    "outlier": "Hanoi",
+    "rule": "All others are capitals of European countries",
+    "distractors": [
+      "All others are capitals",
+      "All others have more than 4 letters",
+      "All others start with consonants",
+      "All others contain the letter 'o'",
+      "All others end with a vowel"
+    ]
+  },
+  {
+    "date": "2026-02-18",
+    "board": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday","April","May"],
+    "outlier": "Monday",
+    "rule": "All others are months",
+    "distractors": [
+      "All others are days of the week",
+      "All others contain six letters",
+      "All others start with a vowel",
+      "All others end with 'y'",
+      "All others have more than 3 syllables"
+    ]
+  },
+  {
+    "date": "2026-02-19",
+    "board": ["1","4","9","16","25","36","49","50","64"],
+    "outlier": "50",
+    "rule": "All others are perfect squares",
+    "distractors": [
+      "All others are even numbers",
+      "All others are less than 70",
+      "All others are divisible by 2",
+      "All others are integers",
+      "All others are multiples of 5"
+    ]
+  },
+  {
+    "date": "2026-02-20",
+    "board": ["🌞","🌜","⭐","☀️","🌙","🌟","🔥","💧","🌈"],
+    "outlier": "💧",
+    "rule": "All others are celestial symbols",
+    "distractors": [
+      "All others are emojis",
+      "All others are bright",
+      "All others are circular",
+      "All others represent the sky",
+      "All others have yellow"
+    ]
+  },
+  {
+    "date": "2026-02-21",
+    "board": ["cat","dog","bat","rat","cow","ant","fish","hen","fox"],
+    "outlier": "fish",
+    "rule": "All others are land animals",
+    "distractors": [
+      "All others have 3 letters",
+      "All others are mammals",
+      "All others are pets",
+      "All others are domesticated",
+      "All others have tails"
+    ]
+  },
+  {
+    "date": "2026-02-22",
+    "board": ["red","green","blue","cyan","magenta","yellow","black","white","orange"],
+    "outlier": "black",
+    "rule": "All others are primary or secondary colors",
+    "distractors": [
+      "All others are colors",
+      "All others contain the letter 'e'",
+      "All others have more than 3 letters",
+      "All others are rainbow colors",
+      "All others contain 'a'"
+    ]
+  },
+  {
+    "date": "2026-02-23",
+    "board": ["AA","AB","AC","AD","AE","AF","AG","AH","BA"],
+    "outlier": "BA",
+    "rule": "All others start with the letter A",
+    "distractors": [
+      "All others are two letters",
+      "All others contain a vowel",
+      "All others are consecutive letters",
+      "All others start with a consonant",
+      "All others contain B"
+    ]
+  }
+];
 
-fetch('puzzles.json')
-  .then(res => res.json())
-  .then(puzzles => {
-    const puzzle = puzzles.find(p => p.date === today);
-    if(!puzzle){
-      document.getElementById('instructions').textContent = "No puzzle for today!";
-      return;
+const today = "2026-02-14"; // you can make this dynamic later
+const puzzle = puzzles.find(p => p.date === today);
+
+const boardDiv = document.getElementById("board");
+const resultDiv = document.getElementById("result");
+const ruleDiv = document.getElementById("rule");
+
+puzzle.board.forEach(item => {
+  const cell = document.createElement("div");
+  cell.className = "cell";
+  cell.textContent = item;
+  
+  cell.onclick = () => {
+    if(item === puzzle.outlier){
+      cell.classList.add("correct");
+      resultDiv.textContent = "You picked correctly!";
+    } else {
+      cell.classList.add("wrong");
+      resultDiv.textContent = `Wrong! The correct answer was: ${puzzle.outlier}`;
     }
+    // show the rule after any guess
+    ruleDiv.style.display = "block";
+    ruleDiv.textContent = "Rule: " + puzzle.rule;
 
-    const boardDiv = document.getElementById("board");
-    const resultDiv = document.getElementById("result");
-    const ruleSection = document.getElementById("ruleSection");
-    const rulesDiv = document.getElementById("rules");
-    const ruleFeedback = document.getElementById("ruleFeedback");
+    // disable further clicks
+    Array.from(boardDiv.children).forEach(c => c.onclick = null);
+  };
 
-    // Shuffle helper
-    function shuffle(array) {
-      return array.sort(() => Math.random() - 0.5);
-    }
-
-    // --- Outlier selection ---
-    puzzle.board.forEach(item => {
-      const cell = document.createElement("div");
-      cell.className = "cell";
-      cell.textContent = item;
-
-      cell.onclick = () => {
-        if(item === puzzle.outlier){
-          cell.classList.add("correct");
-          resultDiv.textContent = "You picked correctly!";
-        } else {
-          cell.classList.add("wrong");
-          resultDiv.textContent = `Wrong! The correct answer was: ${puzzle.outlier}`;
-        }
-
-        // disable further clicks
-        Array.from(boardDiv.children).forEach(c => c.onclick = null);
-
-        // show rule selection
-        ruleSection.style.display = "flex";
-
-        // render rule options (shuffle correct + distractors)
-        const ruleOptions = shuffle([puzzle.rule, ...puzzle.distractors]);
-        ruleOptions.forEach(opt => {
-          const btn = document.createElement("div");
-          btn.className = "rule-btn";
-          btn.textContent = opt;
-          btn.onclick = () => {
-            if(opt === puzzle.rule){
-              btn.classList.add("correct");
-              ruleFeedback.textContent = "Correct! ✅";
-              Array.from(rulesDiv.children).forEach(b=>b.onclick=null);
-            } else {
-              btn.classList.add("wrong");
-              ruleWrongCount++;
-              ruleFeedback.textContent = `Wrong! (${ruleWrongCount}/3)`;
-              if(ruleWrongCount>=3){
-                ruleFeedback.textContent += ` The correct rule was: ${puzzle.rule}`;
-                Array.from(rulesDiv.children).forEach(b=>b.onclick=null);
-              }
-            }
-          };
-          rulesDiv.appendChild(btn);
-        });
-      };
-
-      boardDiv.appendChild(cell);
-    });
-
-  })
-  .catch(err => {
-    console.error("Error loading puzzles:", err);
-    document.getElementById('instructions').textContent = "Error loading puzzles!";
-  });
+  boardDiv.appendChild(cell);
+});
 </script>
 
 </body>

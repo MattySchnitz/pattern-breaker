@@ -1,6 +1,6 @@
 [
   {
-    "date": "2026-02-13",
+    "date": "2026-02-16",
     "board": ["2","4","6","8","10","12","14","16","17"],
     "outlier": "17",
     "rule": "All others are even numbers, 17 is odd",
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "date": "2026-02-16",
+    "date": "2026-02-13",
     "board": ["🍎","🍌","🍇","🍓","🍊","🥝","🍍","🥑","🥦"],
     "outlier": "🥦",
     "rule": "All others are fruits, broccoli is a vegetable",

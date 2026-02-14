@@ -1,6 +1,6 @@
 [
 {
-"date": "2026-02-14",
+"date": "2026-02-15",
 "board": ["CARE","RACE","ACRE","REAC","CAER","EARC","CRAE","RECA","TRACE"],
 "outlier": "TRACE",
 "rule": "All others are four-letter anagrams of each other",
@@ -13,7 +13,7 @@
 ]
 },
 {
-"date": "2026-02-15",
+"date": "2026-02-14",
 "board": ["LEVEL","RADAR","CIVIC","MADAM","ROTOR","REFER","TENET","DEED","MOTOR"],
 "outlier": "MOTOR",
 "rule": "All others read the same forwards and backwards",

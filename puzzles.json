@@ -1,281 +1,132 @@
 [
 {
-"date": "2026-02-15",
-"board": ["2","4","6","8","10","12","14","16","18"],
-"outlier": "18",
-"rule": "All others are single-digit even numbers",
-"distractors": [
-"All are even numbers",
-"All are divisible by 2",
-"All are less than 20",
-"All are multiples of 2",
-"All are positive integers"
-]
-},
-
-{
 "date": "2026-02-14",
-"board": ["🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🦁"],
-"outlier": "🦊",
-"rule": "All others are commonly domesticated or zoo mammals, fox is typically wild",
+"board": ["CARE","RACE","ACRE","REAC","CAER","EARC","CRAE","RECA","TRACE"],
+"outlier": "TRACE",
+"rule": "All others are four-letter anagrams of each other",
 "distractors": [
-"All are mammals",
-"All have fur",
-"All have four legs",
-"All are animals",
-"All have tails"
+"All are pronounceable English words",
+"All contain the letter C",
+"All end with the letter E",
+"All contain exactly two vowels",
+"All begin with a consonant"
 ]
 },
-
+{
+"date": "2026-02-15",
+"board": ["LEVEL","RADAR","CIVIC","MADAM","ROTOR","REFER","TENET","DEED","MOTOR"],
+"outlier": "MOTOR",
+"rule": "All others read the same forwards and backwards",
+"distractors": [
+"All contain two syllables",
+"All contain the letter R",
+"All contain exactly five letters",
+"All begin with a consonant",
+"All end with a consonant"
+]
+},
 {
 "date": "2026-02-16",
-"board": ["Mercury","Venus","Earth","Mars","Jupiter","Saturn","Uranus","Neptune","Sun"],
-"outlier": "Sun",
-"rule": "All others are planets",
-"distractors": [
-"All are in space",
-"All are round",
-"All orbit something",
-"All are celestial bodies",
-"All are visible from Earth"
-]
-},
-
-{
-"date": "2026-02-17",
-"board": ["1","1","2","3","5","8","13","21","22"],
-"outlier": "22",
-"rule": "All others are Fibonacci numbers",
-"distractors": [
-"All are under 25",
-"All are integers",
-"All are positive",
-"All increase",
-"All are two-digit numbers except some"
-]
-},
-
-{
-"date": "2026-02-18",
-"board": ["CLOUD","RAIN","SNOW","SLEET","FOG","WIND","HAIL","STORM","SUN"],
-"outlier": "SUN",
-"rule": "All others are weather conditions",
-"distractors": [
-"All relate to sky",
-"All are nouns",
-"All are natural phenomena",
-"All can occur outdoors",
-"All are visible"
-]
-},
-
-{
-"date": "2026-02-19",
-"board": ["3","5","7","11","13","17","19","23","27"],
-"outlier": "27",
+"board": ["2","3","5","7","11","13","17","19","21"],
+"outlier": "21",
 "rule": "All others are prime numbers",
 "distractors": [
-"All are odd",
-"All are under 30",
-"All are integers",
-"All are positive",
-"All are greater than 2"
+"All are odd numbers",
+"All are less than 25",
+"All are positive integers",
+"All are greater than 1",
+"All contain two digits"
 ]
 },
-
 {
-"date": "2026-02-20",
-"board": ["🍎","🍌","🍇","🍓","🥝","🍍","🥑","🍊","🥦"],
-"outlier": "🥦",
+"date": "2026-02-17",
+"board": ["1","4","9","16","25","36","49","64","80"],
+"outlier": "80",
+"rule": "All others are perfect squares",
+"distractors": [
+"All are even numbers",
+"All are less than 100",
+"All are divisible by 4",
+"All contain two digits",
+"All are composite numbers"
+]
+},
+{
+"date": "2026-02-18",
+"board": ["🍎","🍌","🍇","🍓","🥕","🍑","🍍","🍉","🍒"],
+"outlier": "🥕",
 "rule": "All others are fruits",
 "distractors": [
 "All are edible",
 "All are colorful",
+"All contain seeds",
 "All grow on plants",
-"All are healthy foods",
-"All are round"
+"All are commonly found in grocery stores"
 ]
 },
-
+{
+"date": "2026-02-19",
+"board": ["⚽","🏀","🏈","⚾","🎾","🏐","🥎","🏉","🎱"],
+"outlier": "🎱",
+"rule": "All others are balls used in team sports",
+"distractors": [
+"All are round",
+"All are used in professional leagues",
+"All are used outdoors",
+"All are used in competitive games",
+"All are larger than a hand"
+]
+},
+{
+"date": "2026-02-20",
+"board": ["PARIS","ROME","BERLIN","MADRID","LISBON","VIENNA","WARSAW","PRAGUE","SYDNEY"],
+"outlier": "SYDNEY",
+"rule": "All others are European capital cities",
+"distractors": [
+"All contain at least five letters",
+"All begin with a consonant",
+"All contain the letter A",
+"All are major international cities",
+"All are well-known travel destinations"
+]
+},
 {
 "date": "2026-02-21",
-"board": ["4","9","16","25","36","49","64","81","90"],
-"outlier": "90",
-"rule": "All others are perfect squares",
+"board": ["BIG","LARGE","HUGE","GIANT","ENORMOUS","MASSIVE","VAST","GREAT","TINY"],
+"outlier": "TINY",
+"rule": "All others describe something large",
 "distractors": [
-"All are even",
-"All are under 100",
-"All are integers",
-"All are positive",
-"All are divisible by 3"
+"All contain at least three letters",
+"All begin with a consonant",
+"All are adjectives",
+"All contain more than one vowel",
+"All are commonly used words"
 ]
 },
-
 {
 "date": "2026-02-22",
-"board": ["Paris","London","Berlin","Rome","Madrid","Lisbon","Vienna","Oslo","Chicago"],
-"outlier": "Chicago",
-"rule": "All others are European capitals",
+"board": ["9","18","27","36","45","54","63","72","82"],
+"outlier": "82",
+"rule": "All others are divisible by 9",
 "distractors": [
-"All are cities",
-"All start with consonants",
-"All are large cities",
-"All are tourist destinations",
-"All are in the Northern Hemisphere"
+"All are even numbers",
+"All are less than 90",
+"All are divisible by 3",
+"All contain two digits",
+"All are positive integers"
 ]
 },
-
 {
 "date": "2026-02-23",
-"board": ["🚗","🚕","🚌","🚑","🚒","🚓","🚜","🚲","🚁"],
-"outlier": "🚁",
-"rule": "All others are ground vehicles",
+"board": ["BREAD","BREAK","BROAD","BRAND","BRAID","BRICK","BRISK","BRING","TRICK"],
+"outlier": "TRICK",
+"rule": "All others begin with the letters BR",
 "distractors": [
-"All are transportation",
-"All carry people",
-"All have engines",
-"All move",
-"All are vehicles"
-]
-},
-
-{
-"date": "2026-02-24",
-"board": ["64","32","16","8","4","2","1","0","3"],
-"outlier": "3",
-"rule": "All others are powers of 2",
-"distractors": [
-"All are less than 65",
-"All are integers",
-"All are positive except one",
-"All are even except one",
-"All decrease"
-]
-},
-
-{
-"date": "2026-02-25",
-"board": ["READ","DEAR","DARE","EARD","ARED","REDA","RAED","RDEA","LEAD"],
-"outlier": "LEAD",
-"rule": "All others are anagrams of READ",
-"distractors": [
-"All have four letters",
-"All contain A",
-"All contain R",
-"All are English words",
-"All end in D"
-]
-},
-
-{
-"date": "2026-02-26",
-"board": ["1","4","7","10","13","16","19","22","23"],
-"outlier": "23",
-"rule": "All others increase by 3 each time",
-"distractors": [
-"All are odd",
-"All are integers",
-"All are less than 25",
-"All are positive",
-"All contain the digit 1"
-]
-},
-
-{
-"date": "2026-02-27",
-"board": ["⚽","🏀","🏈","⚾","🎾","🏐","🏉","🏓","🎲"],
-"outlier": "🎲",
-"rule": "All others are sports equipment, dice is a game piece",
-"distractors": [
-"All are round",
-"All are used in games",
-"All are competitive",
-"All involve players",
-"All are objects"
-]
-},
-
-{
-"date": "2026-02-28",
-"board": ["2","3","5","7","11","13","17","19","20"],
-"outlier": "20",
-"rule": "All others are prime numbers",
-"distractors": [
-"All are under 25",
-"All are positive",
-"All are integers",
-"All are odd except one",
-"All are greater than 1"
-]
-},
-
-{
-"date": "2026-03-01",
-"board": ["C","D","E","F","G","A","B","H","I"],
-"outlier": "H",
-"rule": "All others are musical notes",
-"distractors": [
-"All are letters",
-"All are single characters",
-"All are uppercase",
-"All are consonants except one",
-"All appear in the alphabet"
-]
-},
-
-{
-"date": "2026-03-02",
-"board": ["🌍","🌎","🌏","🌕","🌖","🌗","🌘","🌑","🌒"],
-"outlier": "🌕",
-"rule": "All others show phases of the moon, globe is Earth",
-"distractors": [
-"All are circular",
-"All are space related",
-"All are round",
-"All are celestial",
-"All are emojis"
-]
-},
-
-{
-"date": "2026-03-03",
-"board": ["10","20","30","40","50","60","70","80","85"],
-"outlier": "85",
-"rule": "All others are multiples of 10",
-"distractors": [
-"All are divisible by 5",
-"All are even",
-"All are two-digit numbers",
-"All are positive",
-"All are greater than 9"
-]
-},
-
-{
-"date": "2026-03-04",
-"board": ["ANGLE","CIRCLE","SQUARE","TRIANGLE","OVAL","HEXAGON","PENTAGON","OCTAGON","SPHERE"],
-"outlier": "SPHERE",
-"rule": "All others are 2D shapes",
-"distractors": [
-"All are geometric",
-"All are nouns",
-"All relate to math",
-"All are shapes",
-"All contain vowels"
-]
-},
-
-{
-"date": "2026-03-05",
-"board": ["1","8","27","64","125","216","343","512","600"],
-"outlier": "600",
-"rule": "All others are perfect cubes",
-"distractors": [
-"All are greater than 1",
-"All are integers",
-"All are under 700",
-"All are positive",
-"All are divisible by 1"
+"All contain the letter R",
+"All contain two vowels",
+"All contain five letters",
+"All begin with a consonant",
+"All are common English words"
 ]
 }
 ]

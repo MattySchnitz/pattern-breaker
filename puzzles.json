@@ -1,6 +1,6 @@
 [
   {
-    "date": "2026-02-16",
+    "date": "2026-02-15",
     "board": ["2","4","6","8","10","12","14","16","17"],
     "outlier": "17",
     "rule": "All others are even numbers, 17 is odd",
@@ -26,7 +26,7 @@
     ]
   },
   {
-    "date": "2026-02-15",
+    "date": "2026-02-16",
     "board": ["2","3","5","7","11","13","17","19","21"],
     "outlier": "21",
     "rule": "All others are prime numbers",

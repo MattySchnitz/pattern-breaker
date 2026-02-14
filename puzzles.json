@@ -21,8 +21,8 @@
       "All others are even numbers",
       "All others are multiples of 2",
       "All others are positive integers",
-      "All others are less than 20",
-      "All others are divisible by 2"
+      "All others are divisible by 2",
+      "All others are single-digit numbers"
     ]
   },
   {

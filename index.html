@@ -25,41 +25,40 @@
     max-width:400px;
     text-align:center;
   }
-  .board { 
+  .board, .rules { 
     display:grid; 
     grid-template-columns: repeat(3, 100px); 
     gap:10px; 
     margin:20px 0; 
   }
-  .cell { 
+  .cell, .rule-btn { 
     background:#222; 
     padding:20px; 
     text-align:center; 
     cursor:pointer; 
     border-radius:10px; 
     font-weight:bold; 
-    font-size:1.2em; 
+    font-size:1.1em; 
     transition: all 0.3s; 
   }
-  .cell.correct { 
+  .cell.correct, .rule-btn.correct { 
     background:green; 
   }
-  .cell.wrong { 
+  .cell.wrong, .rule-btn.wrong { 
     background:red; 
     opacity:0.6; 
   }
-  #result { 
+  #result, #ruleFeedback { 
     margin-top:20px; 
     font-size:1.2em; 
     color:orange; 
     text-align:center;
   }
-  #rule { 
-    margin-top:15px; 
-    font-size:1em; 
-    color:#fff; 
-    text-align:center;
+  #ruleSection {
     display:none;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
     max-width:400px;
   }
   footer {
@@ -75,14 +74,21 @@
 <div id="instructions">Click the item you think is the outlier!</div>
 <div class="board" id="board"></div>
 <div id="result"></div>
-<div id="rule"></div>
+
+<div id="ruleSection">
+  <div id="ruleInstructions" style="margin-top:10px;">Select the rule that matches the rest of the board:</div>
+  <div class="rules" id="rules"></div>
+  <div id="ruleFeedback"></div>
+</div>
+
 <footer>&copy; 2026 MattySchnitz Productions</footer>
 
 <script>
-const today = "2026-02-14"; // you can update dynamically later
+const today = "2026-02-14"; // change dynamically if desired
+let ruleWrongCount = 0;
 
 fetch('puzzles.json')
-  .then(response => response.json())
+  .then(res => res.json())
   .then(puzzles => {
     const puzzle = puzzles.find(p => p.date === today);
     if(!puzzle){
@@ -92,8 +98,16 @@ fetch('puzzles.json')
 
     const boardDiv = document.getElementById("board");
     const resultDiv = document.getElementById("result");
-    const ruleDiv = document.getElementById("rule");
+    const ruleSection = document.getElementById("ruleSection");
+    const rulesDiv = document.getElementById("rules");
+    const ruleFeedback = document.getElementById("ruleFeedback");
 
+    // Shuffle helper
+    function shuffle(array) {
+      return array.sort(() => Math.random() - 0.5);
+    }
+
+    // --- Outlier selection ---
     puzzle.board.forEach(item => {
       const cell = document.createElement("div");
       cell.className = "cell";
@@ -108,16 +122,40 @@ fetch('puzzles.json')
           resultDiv.textContent = `Wrong! The correct answer was: ${puzzle.outlier}`;
         }
 
-        // reveal the rule after any guess
-        ruleDiv.style.display = "block";
-        ruleDiv.textContent = "Rule: " + puzzle.rule;
-
         // disable further clicks
         Array.from(boardDiv.children).forEach(c => c.onclick = null);
+
+        // show rule selection
+        ruleSection.style.display = "flex";
+
+        // render rule options (shuffle correct + distractors)
+        const ruleOptions = shuffle([puzzle.rule, ...puzzle.distractors]);
+        ruleOptions.forEach(opt => {
+          const btn = document.createElement("div");
+          btn.className = "rule-btn";
+          btn.textContent = opt;
+          btn.onclick = () => {
+            if(opt === puzzle.rule){
+              btn.classList.add("correct");
+              ruleFeedback.textContent = "Correct! ✅";
+              Array.from(rulesDiv.children).forEach(b=>b.onclick=null);
+            } else {
+              btn.classList.add("wrong");
+              ruleWrongCount++;
+              ruleFeedback.textContent = `Wrong! (${ruleWrongCount}/3)`;
+              if(ruleWrongCount>=3){
+                ruleFeedback.textContent += ` The correct rule was: ${puzzle.rule}`;
+                Array.from(rulesDiv.children).forEach(b=>b.onclick=null);
+              }
+            }
+          };
+          rulesDiv.appendChild(btn);
+        });
       };
 
       boardDiv.appendChild(cell);
     });
+
   })
   .catch(err => {
     console.error("Error loading puzzles:", err);

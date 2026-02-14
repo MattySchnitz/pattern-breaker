@@ -63,9 +63,13 @@ h1 {
   border:2px solid orange;
   border-radius:8px;
   cursor:pointer;
+  transition:0.2s;
 }
 
 .rule-option:hover { background:orange; color:black; }
+
+.rule-option.correct { background:#2ecc71; color:#fff; border-color:#2ecc71; }
+.rule-option.wrong { background:#e74c3c; color:#fff; border-color:#e74c3c; }
 
 button.share-btn {
   margin-top:20px;
@@ -193,10 +197,12 @@ function renderRules(puzzle) {
       if (gameOver) return;
 
       if (ruleText === puzzle.rule) {
-        ruleResult = "🟦"; // neutral
+        div.classList.add("correct");       // green flash for correct
+        ruleResult = "🟦";                  // neutral for share
         endGame(true);
       } else {
-        ruleResult = "🟦"; // neutral
+        div.classList.add("wrong");         // red flash for wrong
+        ruleResult = "🟦";                  // neutral
         strikes++;
         checkGameOver();
       }
